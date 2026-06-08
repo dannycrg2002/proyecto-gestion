@@ -12,15 +12,25 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    //Nombre de la tabla en la base de datos
+    protected $table = 'Usuarios';
+
+    //Clave primaria de la tabla
+    protected $primaryKey = 'id_usuario';
+
+    //Desactivar timestamps automáticos (solo usamos created_at)
+    public $timestamps = false;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'nombre',
+        'correo',
+        'contraseña',
+        'rol',
     ];
 
     /**
@@ -29,7 +39,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
+        'contraseña',
         'remember_token',
     ];
 
@@ -39,6 +49,12 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'created_at' => 'datetime',
     ];
+
+    //Obtener el nombre del campo de contraseña
+    public function getAuthPassword()
+    {
+        return $this->contraseña;
+    }
 }

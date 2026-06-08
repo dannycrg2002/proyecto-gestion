@@ -1,18 +1,25 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UsuarioController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
+// Si entran a la raíz, enviarlos al dashboard
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/dashboard');
+});
+
+// Rutas de Login (Públicas)
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Rutas Protegidas (Solo si iniciaste sesión)
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
+    
+    // Rutas de Usuarios (Protegidas por el middleware 'admin' que creamos)
+    Route::middleware('admin')->group(function () {
+        Route::resource('usuarios', UsuarioController::class);
+    });
 });
