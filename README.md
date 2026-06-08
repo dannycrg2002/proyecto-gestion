@@ -4,7 +4,7 @@ Este proyecto es una aplicación web desarrollada en **Laravel (PHP)** y **MySQL
 
 ---
 
-## 🚀 Avance Actual (PARTE 1 Completada)
+## 🚀 Avance Actual (PARTE 1)
 
 Actualmente, el proyecto cuenta con la arquitectura inicial MVC y las siguientes funcionalidades implementadas:
 
@@ -38,3 +38,8 @@ Abre una terminal dentro de la carpeta del proyecto y ejecuta:
 composer install
 npm install
 npm run build   # (o npm run dev, dependiendo de tu entorno local)
+
+## Usuario de prueba
+
+admin1@empresa.com
+admin123
