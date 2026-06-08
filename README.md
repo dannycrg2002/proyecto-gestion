@@ -1,64 +1,40 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Sistema de Gestión de Proyectos - TecnoSoluciones S.A.
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este proyecto es una aplicación web desarrollada en **Laravel (PHP)** y **MySQL** para la empresa TecnoSoluciones S.A. El objetivo del sistema es optimizar la asignación de tareas, el control de proyectos y la gestión de clientes mediante un entorno web seguro y accesible.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Avance Actual (PARTE 1 Completada)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Actualmente, el proyecto cuenta con la arquitectura inicial MVC y las siguientes funcionalidades implementadas:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. **Autenticación Segura (Login/Logout):**
+   - El registro público está deshabilitado por seguridad.
+   - Solo se puede acceder usando credenciales existentes en la base de datos.
+2. **Dashboard de Bienvenida:**
+   - Panel de control básico protegido por sesión.
+3. **Gestión de Usuarios (Control de Roles):**
+   - Módulo protegido por el middleware `CheckAdmin`.
+   - Solo los usuarios con rol de **Admin** pueden ver, crear, editar o eliminar otros usuarios (Gerentes y Desarrolladores).
+4. **Conexión a Base de Datos:**
+   - Modelos adaptados para usar tablas con nombres personalizados en español (ej. tabla `Usuarios`, campos `id_usuario`, `correo`, `contraseña`).
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## ⚙️ Instrucciones de Instalación para el Equipo
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Para ejecutar este proyecto en tu entorno local (XAMPP/Laragon), sigue estos pasos al pie de la letra:
 
-## Laravel Sponsors
+### 1. Clonar o Descargar el Proyecto
+Clona este repositorio o descarga la carpeta del proyecto y colócala dentro de tu carpeta de servidor local (ej. `C:\xampp\htdocs\proyecto-gestion`).
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### 2. Configurar la Base de Datos
+1. Abre **phpMyAdmin** (o tu gestor de MySQL) y crea una base de datos llamada `gestion_proyecto`.
+2. Importa el archivo SQL con las tablas y datos de prueba que hemos creado para el proyecto. (Asegúrate de que existan las tablas `Clientes`, `Proyectos`, `Tareas` y `Usuarios`).
 
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 3. Instalar Dependencias (Backend y Frontend)
+Abre una terminal dentro de la carpeta del proyecto y ejecuta:
+```bash
+composer install
+npm install
+npm run build   # (o npm run dev, dependiendo de tu entorno local)
