@@ -115,7 +115,10 @@
                             <i class="fas fa-chart-line"></i> Dashboard
                         </a>
   
-
+                        <a href="{{ route('proyectos.index') }}" 
+                        class="list-group-item list-group-item-action {{ Route::is('proyectos.*') ? 'active' : '' }}">
+                            <i class="fas fa-folder-open"></i> Proyectos
+                        </a>
                         </a>
                         @if(Auth::user()->rol === 'Admin')
                             <a href="{{ route('usuarios.index') }}" class="list-group-item list-group-item-action {{ Route::is('usuarios.*') ? 'active' : '' }}">
