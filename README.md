@@ -36,6 +36,8 @@ Clona este repositorio o descarga la carpeta del proyecto y colócala dentro de 
 Abre una terminal dentro de la carpeta del proyecto y ejecuta:
 ```bash
 composer install
+php artisan key:generate
+
 npm install
 npm run build   # (o npm run dev, dependiendo de tu entorno local)
 
