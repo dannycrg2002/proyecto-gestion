@@ -39,7 +39,22 @@ composer install
 npm install
 npm run build   # (o npm run dev, dependiendo de tu entorno local)
 
-## Usuario de prueba
-
+## Usuarios de prueba
+admin@empresa.com
 admin1@empresa.com
 admin123
+
+
+gerente2@empresa.com
+gerente1@empresa.com
+gerente123
+
+
+carlos@empresa.com
+ana@empresa.com
+luis@empresa.com
+maria@empresa.com
+jose@empresa.com
+lucia@empresa.com
+miguel@empresa.com
+dev123

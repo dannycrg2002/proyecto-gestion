@@ -55,8 +55,9 @@
                 </div>
             </div>
         </div>
-
-        <div class="col-md-3">
+    @endif
+        
+    <div class="col-md-3">
             <div class="card">
                 <div class="card-body text-center">
                     <i class="fas fa-folder-open fa-3x text-primary mb-3"></i>
@@ -67,10 +68,10 @@
                     </a>
                 </div>
             </div>
-        </div>
-
     </div>
-    @endif
+    </div>
+    
+
 
 </div>
 @endsection
