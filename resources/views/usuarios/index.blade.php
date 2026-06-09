@@ -24,7 +24,7 @@
                             <th>Nombre</th>
                             <th>Correo</th>
                             <th>Rol</th>
-                            <th>Fecha Registro</th>
+                            
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -42,7 +42,7 @@
                                         <span class="badge bg-info">Desarrollador</span>
                                     @endif
                                 </td>
-                                <td>{{ $usuario->created_at ? $usuario->created_at->format('d/m/Y') : 'N/A' }}</td>
+                                
                                 <td>
                                     <a href="{{ route('usuarios.show', $usuario->id_usuario) }}" class="btn btn-sm btn-info">
                                         <i class="fas fa-eye"></i>
