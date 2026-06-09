@@ -47,10 +47,7 @@
                             @endif
                         </p>
                     </div>
-                    <div class="mb-3">
-                        <strong>Fecha de Registro:</strong>
-                        <p>{{ $usuario->created_at ? $usuario->created_at->format('d/m/Y H:i') : 'N/A' }}</p>
-                    </div>
+
                 </div>
             </div>
         </div>
