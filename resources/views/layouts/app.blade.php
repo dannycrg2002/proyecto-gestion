@@ -12,6 +12,9 @@
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         .navbar {
             background-color: #2c3e50 !important;
@@ -27,7 +30,7 @@
             padding-top: 20px;
         }
         .sidebar a {
-            color: #ecf0f1;
+            color: #34495e;
             text-decoration: none;
             display: block;
             padding: 12px 20px;
@@ -70,7 +73,7 @@
             color: #ecf0f1;
             text-align: center;
             padding: 20px;
-            margin-top: 40px;
+            margin-top: auto;
         }
     </style>
     @yield('styles')
@@ -95,10 +98,6 @@
                                 @csrf
                                 <button type="submit" class="btn btn-sm btn-danger">Salir</button>
                             </form>
-                        </li>
-                    @else
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">Iniciar Sesión</a>
                         </li>
                     @endif
                 </ul>
