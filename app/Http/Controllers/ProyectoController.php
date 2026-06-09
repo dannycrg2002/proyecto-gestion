@@ -21,7 +21,7 @@ class ProyectoController extends Controller
             ->when($estado, function ($query, $estado) {
                 $query->where('estado', $estado);
             })
-            ->orderBy('id_proyecto', 'desc')
+            ->orderBy('id_proyecto', 'asc')
             ->get();
 
         return view('proyectos.index', compact('proyectos', 'buscar', 'estado'));

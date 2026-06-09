@@ -13,64 +13,97 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f8f9fa;
         }
+
         .navbar {
             background-color: #2c3e50 !important;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
+
         .navbar-brand {
             font-weight: bold;
             font-size: 1.5em;
+            color: #ffffff !important;
         }
+
         .sidebar {
             background-color: #34495e;
             min-height: 100vh;
             padding-top: 20px;
         }
-        .sidebar a {
-            color: #ecf0f1;
-            text-decoration: none;
-            display: block;
-            padding: 12px 20px;
+
+        .sidebar .list-group {
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .sidebar .list-group-item {
+            background-color: #34495e;
+            color: #ffffff;
+            border: none;
             border-left: 4px solid transparent;
+            padding: 12px 20px;
+            font-weight: 500;
+            text-decoration: none;
             transition: all 0.3s ease;
         }
-        .sidebar a:hover {
+
+        .sidebar .list-group-item:hover {
             background-color: #2c3e50;
+            color: #ffffff;
             border-left-color: #3498db;
         }
-        .sidebar a.active {
+
+        .sidebar .list-group-item.active {
             background-color: #3498db;
+            color: #ffffff;
             border-left-color: #2980b9;
         }
+
+        .sidebar .list-group-item i {
+            color: #ffffff;
+            margin-right: 6px;
+        }
+
         .main-content {
             padding: 30px;
         }
+
         .card {
             border: none;
             box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
             margin-bottom: 20px;
         }
+
         .btn-primary {
             background-color: #3498db;
             border-color: #3498db;
         }
+
         .btn-primary:hover {
             background-color: #2980b9;
             border-color: #2980b9;
         }
+
         .alert {
             border-radius: 5px;
             margin-bottom: 20px;
         }
+
         .table-hover tbody tr:hover {
             background-color: #f5f5f5;
         }
+
         footer {
             background-color: #2c3e50;
-            color: #ecf0f1;
+            color: #ffffff;
             text-align: center;
-            padding: 20px;
-            margin-top: 40px;
+            padding: 18px;
+            margin-top: 0;
+            font-weight: 500;
+        }
+
+        footer p {
+            margin: 0;
         }
     </style>
     @yield('styles')
@@ -111,20 +144,24 @@
             <div class="row">
                 <div class="col-md-3 sidebar">
                     <div class="list-group">
-                        <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action {{ Route::is('dashboard') ? 'active' : '' }}">
+
+                        <a href="{{ route('dashboard') }}" 
+                        class="list-group-item list-group-item-action {{ Route::is('dashboard') ? 'active' : '' }}">
                             <i class="fas fa-chart-line"></i> Dashboard
                         </a>
-  
+
                         <a href="{{ route('proyectos.index') }}" 
                         class="list-group-item list-group-item-action {{ Route::is('proyectos.*') ? 'active' : '' }}">
                             <i class="fas fa-folder-open"></i> Proyectos
                         </a>
-                        </a>
+
                         @if(Auth::user()->rol === 'Admin')
-                            <a href="{{ route('usuarios.index') }}" class="list-group-item list-group-item-action {{ Route::is('usuarios.*') ? 'active' : '' }}">
+                            <a href="{{ route('usuarios.index') }}" 
+                            class="list-group-item list-group-item-action {{ Route::is('usuarios.*') ? 'active' : '' }}">
                                 <i class="fas fa-users-cog"></i> Usuarios
                             </a>
                         @endif
+
                     </div>
                 </div>
                 <div class="col-md-9">
