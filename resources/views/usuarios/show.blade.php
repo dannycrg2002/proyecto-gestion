@@ -47,7 +47,16 @@
                             @endif
                         </p>
                     </div>
-
+                    <div class="mb-3">
+                        <strong>Estado:</strong>
+                        <p>
+                            @if($usuario->estado === 'inactivo')
+                                <span class="badge bg-secondary fs-6"><i class="fas fa-ban"></i> Inactivo</span>
+                            @else
+                                <span class="badge bg-success fs-6"><i class="fas fa-check-circle"></i> Activo</span>
+                            @endif
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

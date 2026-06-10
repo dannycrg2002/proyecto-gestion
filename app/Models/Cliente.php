@@ -16,8 +16,18 @@ class Cliente extends Model
         'telefono'
     ];
 
-    public function proyectos()
+    protected $casts = [
+        'fecha_registro' => 'datetime'
+    ];
+
+    // public function proyectos()
+    // {
+    //     return $this->hasMany(Proyecto::class, 'id_cliente');
+    // }
+
+public function proyectos()
     {
-        return $this->hasMany(Proyecto::class, 'id_cliente');
+        return $this->hasMany(Proyecto::class, 'id_cliente', 'id_cliente');
     }
+
 }

@@ -116,6 +116,11 @@
                         <a href="{{ route('proyectos.index') }}" class="list-group-item list-group-item-action {{ Route::is('proyectos.*') ? 'active' : '' }}">
                             <i class="fas fa-tasks"></i> Proyectos
                         </a>
+
+                        <a href="{{ route('clientes.index') }}" class="list-group-item list-group-item-action {{ Route::is('clientes.*') ? 'active' : '' }}">
+                            <i class="fas fa-users"></i> Clientes
+                        </a>
+                        
                         @if(Auth::user()->rol === 'Admin')
                             <a href="{{ route('usuarios.index') }}" class="list-group-item list-group-item-action {{ Route::is('usuarios.*') ? 'active' : '' }}">
                                 <i class="fas fa-users-cog"></i> Usuarios

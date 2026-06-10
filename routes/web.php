@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ProyectoController;
+use App\Http\Controllers\ClienteController;
 
 // Si entran a la raíz, enviarlos al dashboard
 Route::get('/', function () {
@@ -26,5 +27,9 @@ Route::middleware('auth')->group(function () {
     // Módulo de usuarios: solo Admin
     Route::middleware('admin')->group(function () {
         Route::resource('usuarios', UsuarioController::class);
+        Route::post('usuarios/{id}/toggle-estado', [UsuarioController::class, 'toggleEstado'])->name('usuarios.toggleEstado');
     });
+
+    // Módulo de clientes
+    Route::resource('clientes', ClienteController::class);
 });

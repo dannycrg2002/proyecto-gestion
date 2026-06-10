@@ -30,6 +30,10 @@ class AuthController extends Controller
         $user = User::where('correo', $request->correo)->first();
 
         if ($user && Hash::check($request->contraseña, $user->contraseña)) {
+            // Verificar si el usuario está activo
+            if ($user->estado === 'inactivo') {
+                return back()->with('error', 'Tu cuenta ha sido desactivada. Contacta al administrador.');
+            }
             Auth::login($user);
             return redirect()->route('dashboard')->with('success', 'Bienvenido');
         }

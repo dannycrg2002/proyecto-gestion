@@ -1,112 +1,108 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Agregar Proyecto</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f6f9;
-            padding: 30px;
-        }
+@extends('layouts.app')
 
-        .formulario {
-            background: white;
-            width: 500px;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 0 8px rgba(0,0,0,0.2);
-        }
+@section('title', 'Nuevo Proyecto')
 
-        label {
-            font-weight: bold;
-            display: block;
-            margin-top: 12px;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 9px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-        }
-
-        button, a {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 14px;
-            background: #2563eb;
-            color: white;
-            text-decoration: none;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-
-        .volver {
-            background: #374151;
-        }
-
-        .error {
-            background: #fee2e2;
-            color: #b91c1c;
-            padding: 10px;
-            border-radius: 6px;
-            margin-bottom: 10px;
-        }
-    </style>
-</head>
-<body>
-
-<h1>Agregar Proyecto</h1>
-
-<div class="formulario">
-
-    @if($errors->any())
-        <div class="error">
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+@section('content')
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <h1><i class="fas fa-plus-circle"></i> Nuevo Proyecto</h1>
         </div>
-    @endif
+    </div>
 
-    <form action="{{ route('proyectos.store') }}" method="POST">
-        @csrf
+    <div class="card">
+        <div class="card-body">
+            <form action="{{ route('proyectos.store') }}" method="POST">
+                @csrf
 
-        <label>Cliente:</label>
-        <select name="id_cliente" required>
-            <option value="">Seleccione un cliente</option>
-            @foreach($clientes as $cliente)
-                <option value="{{ $cliente->id_cliente }}">{{ $cliente->nombre }}</option>
-            @endforeach
-        </select>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="id_cliente" class="form-label">Cliente <span class="text-danger">*</span></label>
+                            <select class="form-select @error('id_cliente') is-invalid @enderror" id="id_cliente" name="id_cliente" required>
+                                <option value="">Seleccione un cliente</option>
+                                @foreach($clientes as $cliente)
+                                    <option value="{{ $cliente->id_cliente }}"
+                                        {{ old('id_cliente') == $cliente->id_cliente ? 'selected' : '' }}>
+                                        {{ $cliente->nombre }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('id_cliente')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
 
-        <label>Nombre del proyecto:</label>
-        <input type="text" name="nombre" required>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre del proyecto <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control @error('nombre') is-invalid @enderror"
+                                   id="nombre" name="nombre" value="{{ old('nombre') }}" required>
+                            @error('nombre')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
 
-        <label>Descripción:</label>
-        <textarea name="descripcion" rows="4"></textarea>
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label">Descripción</label>
+                    <textarea class="form-control @error('descripcion') is-invalid @enderror"
+                              id="descripcion" name="descripcion" rows="4">{{ old('descripcion') }}</textarea>
+                    @error('descripcion')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
 
-        <label>Estado:</label>
-        <select name="estado" required>
-            <option value="En curso">En curso</option>
-            <option value="Completado">Completado</option>
-            <option value="Cancelado">Cancelado</option>
-        </select>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="estado" class="form-label">Estado <span class="text-danger">*</span></label>
+                            <select class="form-select @error('estado') is-invalid @enderror" id="estado" name="estado" required>
+                                <option value="En curso"   {{ old('estado', 'En curso') == 'En curso'   ? 'selected' : '' }}>En curso</option>
+                                <option value="Completado" {{ old('estado') == 'Completado' ? 'selected' : '' }}>Completado</option>
+                                <option value="Cancelado"  {{ old('estado') == 'Cancelado'  ? 'selected' : '' }}>Cancelado</option>
+                            </select>
+                            @error('estado')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
 
-        <label>Fecha de inicio:</label>
-        <input type="date" name="fecha_inicio">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="fecha_inicio" class="form-label">Fecha de inicio</label>
+                            <input type="date" class="form-control @error('fecha_inicio') is-invalid @enderror"
+                                   id="fecha_inicio" name="fecha_inicio" value="{{ old('fecha_inicio') }}">
+                            @error('fecha_inicio')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
 
-        <label>Fecha de fin:</label>
-        <input type="date" name="fecha_fin">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="fecha_fin" class="form-label">Fecha de fin</label>
+                            <input type="date" class="form-control @error('fecha_fin') is-invalid @enderror"
+                                   id="fecha_fin" name="fecha_fin" value="{{ old('fecha_fin') }}">
+                            @error('fecha_fin')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
 
-        <button type="submit">Guardar proyecto</button>
-        <a href="{{ route('proyectos.index') }}" class="volver">Cancelar</a>
-    </form>
-
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Guardar Proyecto
+                    </button>
+                    <a href="{{ route('proyectos.index') }}" class="btn btn-secondary">
+                        <i class="fas fa-times"></i> Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
-
-</body>
-</html>
+@endsection

@@ -42,6 +42,7 @@ class UsuarioController extends Controller
             'correo' => $request->correo,
             'contraseña' => Hash::make($request->contraseña),
             'rol' => $request->rol,
+            'estado' => 'activo',
         ]);
 
         return redirect()->route('usuarios.index')->with('success', 'Usuario creado exitosamente.');
@@ -110,5 +111,25 @@ class UsuarioController extends Controller
         $usuario->delete();
 
         return redirect()->route('usuarios.index')->with('success', 'Usuario eliminado exitosamente.');
+    }
+
+    /**
+     * Activar o desactivar un usuario.
+     */
+    public function toggleEstado($id)
+    {
+        $usuario = User::findOrFail($id);
+
+        // No puede desactivarse a sí mismo
+        if ($usuario->id_usuario == auth()->user()->id_usuario) {
+            return redirect()->route('usuarios.index')->with('error', 'No puedes desactivar tu propio usuario.');
+        }
+
+        $usuario->estado = ($usuario->estado === 'activo') ? 'inactivo' : 'activo';
+        $usuario->save();
+
+        $mensaje = $usuario->estado === 'activo' ? 'Usuario activado exitosamente.' : 'Usuario desactivado exitosamente.';
+
+        return redirect()->route('usuarios.index')->with('success', $mensaje);
     }
 }

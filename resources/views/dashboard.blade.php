@@ -56,7 +56,8 @@
             </div>
         </div>
     @endif
-        
+    
+    
     <div class="col-md-3">
             <div class="card">
                 <div class="card-body text-center">
@@ -69,6 +70,22 @@
                 </div>
             </div>
     </div>
+
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                <h5>Gestión de Clientes</h5>
+                <p class="text-muted">
+                    Total: {{ App\Models\Cliente::count() }} clientes
+                </p>
+                <a href="{{ route('clientes.index') }}" class="btn btn-primary btn-sm">
+                    <i class="fas fa-cog"></i> Gestionar
+                </a>
+            </div>
+        </div>
+    </div>
+
     </div>
     
 
