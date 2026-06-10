@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    @if(Auth::user()->rol === 'Admin')
+    @if(Auth::user()->rol === 'Admin') 
     <div class="row">
         <div class="col-md-3">
             <div class="card">
@@ -86,7 +86,46 @@
                 </div>
             </div>
         </div>
+
+
+
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-tasks fa-3x text-warning mb-3"></i>
+                    <h5>Gestión de Tareas</h5>
+                    <p class="text-muted">
+                        Total: {{ App\Models\Tarea::count() }} tareas
+                    </p>
+                    <a href="{{ route('tareas.index') }}" class="btn btn-warning btn-sm">
+                        <i class="fas fa-cog"></i> Gestionar
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-file-alt fa-3x text-secondary mb-3"></i>
+                    <h5>Reportes</h5>
+                    <p class="text-muted">
+                        Generar informes del sistema
+                    </p>
+                    <a href="{{ route('reportes.index') }}" class="btn btn-secondary btn-sm">
+                        <i class="fas fa-chart-bar"></i> Ver Reportes
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
     </div>
+
+
+
+
 
     <!-- Cards de Clientes -->
     <div class="row mt-4">
