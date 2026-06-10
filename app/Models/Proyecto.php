@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Proyecto extends Model
 {
-    protected $table = 'proyectos';
+    protected $table      = 'proyectos';
     protected $primaryKey = 'id_proyecto';
-    public $timestamps = false;
+    public    $timestamps = false;
 
     protected $fillable = [
         'id_cliente',
@@ -16,11 +16,17 @@ class Proyecto extends Model
         'descripcion',
         'estado',
         'fecha_inicio',
-        'fecha_fin'
+        'fecha_fin',
     ];
 
+    // la relacion donde cada proyecto le pertenece a un cliente
     public function cliente()
     {
-        return $this->belongsTo(Cliente::class, 'id_cliente');
+        return $this->belongsTo(Cliente::class, 'id_cliente', 'id_cliente');
+    }
+
+    public function tareas()
+    {
+        return $this->hasMany(Tarea::class, 'id_proyecto', 'id_proyecto');
     }
 }
