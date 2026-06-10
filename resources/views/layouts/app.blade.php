@@ -28,6 +28,7 @@
             background-color: #34495e;
             min-height: 100vh;
             padding-top: 20px;
+            position: relative;
         }
         .sidebar a {
             color: #34495e;
@@ -40,10 +41,12 @@
         .sidebar a:hover {
             background-color: #2c3e50;
             border-left-color: #3498db;
+            color: #fff;
         }
         .sidebar a.active {
             background-color: #3498db;
             border-left-color: #2980b9;
+            color: #fff;
         }
         .main-content {
             padding: 30px;
@@ -74,6 +77,73 @@
             text-align: center;
             padding: 20px;
             margin-top: auto;
+        }
+
+        /* Botón para toggle del sidebar en móvil */
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 10px;
+            z-index: 1000;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* Estilos responsive */
+        @media (max-width: 768px) {
+            .sidebar-toggle {
+                display: block;
+            }
+
+            .sidebar {
+                position: fixed;
+                left: -100%;
+                top: 56px;
+                width: 250px;
+                z-index: 999;
+                transition: left 0.3s ease;
+                min-height: calc(100vh - 56px);
+            }
+
+            .sidebar.show {
+                left: 0;
+            }
+
+            .sidebar-overlay {
+                display: none;
+                position: fixed;
+                top: 56px;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0,0,0,0.5);
+                z-index: 998;
+            }
+
+            .sidebar-overlay.show {
+                display: block;
+            }
+
+            .col-md-9 {
+                width: 100%;
+                padding: 0;
+            }
+
+            .main-content {
+                padding: 15px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .sidebar {
+                display: block !important;
+            }
         }
     </style>
     @yield('styles')
@@ -106,9 +176,17 @@
     </nav>
 
     @if(Auth::check())
+        <!-- Botón toggle para móvil -->
+        <button class="sidebar-toggle" onclick="toggleSidebar()">
+            <i class="fas fa-bars"></i> Menú
+        </button>
+
+        <!-- Overlay para cerrar sidebar en móvil -->
+        <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-3 sidebar">
+                <div class="col-md-3 sidebar" id="sidebar">
                     <div class="list-group">
                         <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action {{ Route::is('dashboard') ? 'active' : '' }}">
                             <i class="fas fa-chart-line"></i> Dashboard
@@ -174,6 +252,31 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.querySelector('.sidebar-overlay');
+            
+            if (sidebar && overlay) {
+                sidebar.classList.toggle('show');
+                overlay.classList.toggle('show');
+            }
+        }
+
+        // Cerrar sidebar al hacer clic en un enlace en móvil
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarLinks = document.querySelectorAll('.sidebar a');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 768) {
+                        toggleSidebar();
+                    }
+                });
+            });
+        });
+    </script>
+
     @yield('scripts')
 </body>
 </html>

@@ -85,6 +85,25 @@ class AuthController extends Controller
      */
     public function dashboard()
     {
-        return view('dashboard');
+        // Datos de clientes
+        $totalClientes = \App\Models\Cliente::count();
+        $clientesConProyectos = \App\Models\Cliente::has('proyectos')->count();
+        
+        // Datos de proyectos
+        $proyectosPorEstado = \App\Models\Proyecto::selectRaw('estado, COUNT(*) as total')
+            ->groupBy('estado')
+            ->pluck('total', 'estado');
+        
+        $proyectosProximosVencer = \App\Models\Proyecto::where('fecha_fin', '>=', now())
+            ->where('fecha_fin', '<=', now()->addDays(15))
+            ->whereNotIn('estado', ['Completado', 'Cancelado'])
+            ->count();
+        
+        return view('dashboard', compact(
+            'totalClientes',
+            'clientesConProyectos',
+            'proyectosPorEstado',
+            'proyectosProximosVencer'
+        ));
     }
 }
