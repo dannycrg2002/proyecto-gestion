@@ -199,6 +199,22 @@
                             <i class="fas fa-users"></i> Clientes
                         </a>
                         
+
+
+                        <a href="{{ route('tareas.index') }}"
+                        class="list-group-item list-group-item-action {{ Route::is('tareas.*') ? 'active' : '' }}">
+                            <i class="fas fa-tasks me-2"></i> Tareas
+                        </a>
+
+                        
+                        <a href="{{ route('reportes.index') }}"
+                        class="list-group-item list-group-item-action {{ Route::is('reportes.*') ? 'active' : '' }}">
+                            <i class="fas fa-file-pdf me-2 text-danger"></i> Reportes PDF
+                        </a>
+
+
+
+
                         @if(Auth::user()->rol === 'Admin')
                             <a href="{{ route('usuarios.index') }}" class="list-group-item list-group-item-action {{ Route::is('usuarios.*') ? 'active' : '' }}">
                                 <i class="fas fa-users-cog"></i> Usuarios
