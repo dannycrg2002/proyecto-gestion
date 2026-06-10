@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-06-2026 a las 08:44:07
+-- Tiempo de generación: 10-06-2026 a las 22:00:47
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -81,7 +81,8 @@ INSERT INTO `proyectos` (`id_proyecto`, `id_cliente`, `nombre`, `descripcion`, `
 (7, 7, 'Mesa de Ayuda', 'Sistema de tickets de soporte', 'En curso', '2025-02-20', '2025-08-30'),
 (8, 8, 'Control Logístico', 'Seguimiento de entregas', 'En curso', '2025-04-01', '2025-12-01'),
 (9, 9, 'E-Commerce', 'Tienda virtual corporativa', 'Completado', '2024-05-01', '2024-11-01'),
-(10, 10, 'Gestión Documental', 'Administración de documentos', 'En curso', '2025-01-05', '2025-09-30');
+(10, 10, 'Gestión Documental', 'Administración de documentos', 'En curso', '2025-01-05', '2025-09-30'),
+(11, 8, 'Sistema de Gestión', 'Sistema de Gestión', 'Completado', '2026-06-10', '2026-06-30');
 
 -- --------------------------------------------------------
 
@@ -125,26 +126,27 @@ CREATE TABLE `usuarios` (
   `nombre` varchar(255) DEFAULT NULL,
   `correo` varchar(255) DEFAULT NULL,
   `contraseña` varchar(255) DEFAULT NULL,
-  `rol` enum('Admin','Gerente','Desarrollador') DEFAULT NULL
+  `rol` enum('Admin','Gerente','Desarrollador') DEFAULT NULL,
+  `estado` enum('activo','inactivo','','') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuario`, `nombre`, `correo`, `contraseña`, `rol`) VALUES
-(1, 'Administrador General', 'admin@empresa.com', '$2y$10$x.5YB62MZvBSlUqRy7JdruJAuh1ZmfhCbeEyBBMSey5Xho3V7U.Wi', 'Admin'),
-(2, 'Gerente Comercial', 'gerente1@empresa.com', '$2y$10$mAINuVsYsRkSAlcTEn68ZuAvhvWxgJ7zAov7IdcpmsFKOwGDlB8KK', 'Gerente'),
-(3, 'Gerente Operaciones', 'gerente2@empresa.com', '$2y$10$zp29FEY7lmJraw/rzNo9G.TXdzHacWt0VETJ.eV60h.4aiwBjqm.G', 'Gerente'),
-(4, 'Carlos Ramos', 'carlos@empresa.com', '$2y$10$Vi7BWOhmcTm49GWvoVquVeHf/sbkrRBGh8tSqQJE1IuzlWI8GIMWW', 'Desarrollador'),
-(5, 'Ana Torres', 'ana@empresa.com', '$2y$10$W4..9Ih0y13AUueXySemlu4GR5qrlIMOwPIhOy1rMUl/9BDK26tqW', 'Desarrollador'),
-(6, 'Luis Mendoza', 'luis@empresa.com', '$2y$10$ibR3xM6JiHQapLt3W5NLzeWMqPLZJQZw.XoWULpvoBxGH6b2vQPNK', 'Desarrollador'),
-(7, 'María Flores', 'maria@empresa.com', '$2y$10$li1jvvFxN2ODyi678M/zIOC0HS3Hcto9Eg8BOtE.KaMh8ITh4dRri', 'Desarrollador'),
-(8, 'José Pérez', 'jose@empresa.com', '$2y$10$oMAUrm5wzSfCk3rcSPIh8.MSt8OcgQml3HXt5eOeaG9kxHYgsqWj2', 'Desarrollador'),
-(9, 'Lucía Castro', 'lucia@empresa.com', '$2y$10$Z24dCMzhDuc1q4onZVHVj.JaFthdOCWhrwkWqyaDIq35.rarBswd2', 'Desarrollador'),
-(10, 'Miguel Ruiz', 'miguel@empresa.com', '$2y$10$Igk12/nPzm3FYpdJT1YjguDbezCsOgwaZ0SZoIE8vEl2GL97FjKAy', 'Desarrollador'),
-(11, 'Administrador General', 'admin1@empresa.com', '$2y$10$B04mVIOxBMNSSCHhCU2/7uGNiGna/TFwGQVLu8I0784MBAN1hsEkS', 'Admin'),
-(12, 'Danny', 'danny@email.com', '$2y$10$8hEszLaR4z/o0nq2BsS26ep/B/MaI8crnsvKg8IfEYqHXPQ6WaA.a', 'Admin');
+INSERT INTO `usuarios` (`id_usuario`, `nombre`, `correo`, `contraseña`, `rol`, `estado`) VALUES
+(1, 'Administrador General', 'admin@empresa.com', '$2y$10$x.5YB62MZvBSlUqRy7JdruJAuh1ZmfhCbeEyBBMSey5Xho3V7U.Wi', 'Admin', 'activo'),
+(2, 'Gerente Comercial', 'gerente1@empresa.com', '$2y$10$mAINuVsYsRkSAlcTEn68ZuAvhvWxgJ7zAov7IdcpmsFKOwGDlB8KK', 'Gerente', 'activo'),
+(3, 'Gerente Operaciones', 'gerente2@empresa.com', '$2y$10$zp29FEY7lmJraw/rzNo9G.TXdzHacWt0VETJ.eV60h.4aiwBjqm.G', 'Gerente', 'activo'),
+(4, 'Carlos Ramos', 'carlos@empresa.com', '$2y$10$Vi7BWOhmcTm49GWvoVquVeHf/sbkrRBGh8tSqQJE1IuzlWI8GIMWW', 'Desarrollador', 'activo'),
+(5, 'Ana Torres', 'ana@empresa.com', '$2y$10$W4..9Ih0y13AUueXySemlu4GR5qrlIMOwPIhOy1rMUl/9BDK26tqW', 'Desarrollador', 'activo'),
+(6, 'Luis Mendoza', 'luis@empresa.com', '$2y$10$ibR3xM6JiHQapLt3W5NLzeWMqPLZJQZw.XoWULpvoBxGH6b2vQPNK', 'Desarrollador', 'inactivo'),
+(7, 'María Flores', 'maria@empresa.com', '$2y$10$li1jvvFxN2ODyi678M/zIOC0HS3Hcto9Eg8BOtE.KaMh8ITh4dRri', 'Desarrollador', 'inactivo'),
+(8, 'José Pérez', 'jose@empresa.com', '$2y$10$oMAUrm5wzSfCk3rcSPIh8.MSt8OcgQml3HXt5eOeaG9kxHYgsqWj2', 'Desarrollador', 'activo'),
+(9, 'Lucía Castro', 'lucia@empresa.com', '$2y$10$Z24dCMzhDuc1q4onZVHVj.JaFthdOCWhrwkWqyaDIq35.rarBswd2', 'Desarrollador', 'activo'),
+(10, 'Miguel Ruiz', 'miguel@empresa.com', '$2y$10$Igk12/nPzm3FYpdJT1YjguDbezCsOgwaZ0SZoIE8vEl2GL97FjKAy', 'Desarrollador', 'activo'),
+(11, 'Administrador General', 'admin1@empresa.com', '$2y$10$B04mVIOxBMNSSCHhCU2/7uGNiGna/TFwGQVLu8I0784MBAN1hsEkS', 'Admin', 'activo'),
+(12, 'Danny', 'danny@email.com', '$2y$10$8hEszLaR4z/o0nq2BsS26ep/B/MaI8crnsvKg8IfEYqHXPQ6WaA.a', 'Admin', 'activo');
 
 --
 -- Índices para tablas volcadas
@@ -186,13 +188,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `proyectos`
 --
 ALTER TABLE `proyectos`
-  MODIFY `id_proyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_proyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `tareas`
