@@ -6,10 +6,16 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ProyectoController;
 use App\Http\Controllers\ClienteController;
 
+use App\Http\Controllers\TareaController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ReporteController;
+
+
 // Si entran a la raíz, enviarlos al dashboard
 Route::get('/', function () {
     return redirect('/dashboard');
 });
+
 
 // Rutas de Login públicas
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -32,4 +38,16 @@ Route::middleware('auth')->group(function () {
 
     // Módulo de clientes
     Route::resource('clientes', ClienteController::class);
+
+
+    // Tareas (Rogger - Parte 4)
+    Route::resource('tareas', TareaController::class);
+
+// Reportes PDF (Rogger - Parte 4)
+    Route::get('/reportes',           [ReporteController::class, 'index'])    ->name('reportes.index');
+    Route::get('/reportes/proyectos', [ReporteController::class, 'proyectos'])->name('reportes.proyectos');
+    Route::get('/reportes/clientes',  [ReporteController::class, 'clientes']) ->name('reportes.clientes');
+
+
+
 });
