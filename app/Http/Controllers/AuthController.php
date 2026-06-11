@@ -7,19 +7,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Controlador de Autenticación
+ * Gestiona login, logout, registro y vista del dashboard
+ */
 class AuthController extends Controller
 {
-    /**
-     * Mostrar formulario de login
-     */
+    // Mostrar formulario de login
     public function showLoginForm()
     {
         return view('auth.login');
     }
 
-    /**
-     * Procesar login
-     */
+    // Procesar login validando credenciales y estado del usuario
     public function login(Request $request)
     {
         $request->validate([
@@ -41,17 +41,13 @@ class AuthController extends Controller
         return back()->with('error', 'Correo o contraseña incorrectos.');
     }
 
-    /**
-     * Mostrar formulario de registro
-     */
+    // Mostrar formulario de registro
     public function showRegisterForm()
     {
         return view('auth.register');
     }
 
-    /**
-     * Procesar registro
-     */
+    // Procesar registro de nuevo usuario con contraseña encriptada
     public function register(Request $request)
     {
         $request->validate([
@@ -71,18 +67,14 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', 'Registro exitoso. Por favor inicia sesión.');
     }
 
-    /**
-     * Logout
-     */
+    // Cerrar sesión del usuario
     public function logout()
     {
         Auth::logout();
         return redirect()->route('login')->with('success', 'Sesión cerrada exitosamente.');
     }
 
-    /**
-     * Dashboard
-     */
+    // Mostrar dashboard con estadísticas de clientes y proyectos
     public function dashboard()
     {
         // Datos de clientes

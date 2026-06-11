@@ -6,28 +6,26 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * Controlador de Usuarios
+ * Gestiona el CRUD de usuarios del sistema (solo Admin)
+ */
 class UsuarioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Listar todos los usuarios ordenados por nombre
     public function index()
     {
         $usuarios = User::orderBy('nombre')->get();
         return view('usuarios.index', compact('usuarios'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Mostrar formulario de creación
     public function create()
     {
         return view('usuarios.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Guardar nuevo usuario con contraseña encriptada
     public function store(Request $request)
     {
         $request->validate([
@@ -48,27 +46,21 @@ class UsuarioController extends Controller
         return redirect()->route('usuarios.index')->with('success', 'Usuario creado exitosamente.');
     }
 
-    /**
-     * Display the specified resource.
-     */
+    // Mostrar detalle de un usuario específico
     public function show($id)
     {
         $usuario = User::findOrFail($id);
         return view('usuarios.show', compact('usuario'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    // Mostrar formulario de edición
     public function edit($id)
     {
         $usuario = User::findOrFail($id);
         return view('usuarios.edit', compact('usuario'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // Actualizar usuario (contraseña opcional)
     public function update(Request $request, $id)
     {
         $usuario = User::findOrFail($id);
@@ -96,9 +88,7 @@ class UsuarioController extends Controller
         return redirect()->route('usuarios.index')->with('success', 'Usuario actualizado exitosamente.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // Eliminar usuario (no puede eliminarse a sí mismo)
     public function destroy($id)
     {
         $usuario = User::findOrFail($id);
@@ -113,9 +103,7 @@ class UsuarioController extends Controller
         return redirect()->route('usuarios.index')->with('success', 'Usuario eliminado exitosamente.');
     }
 
-    /**
-     * Activar o desactivar un usuario.
-     */
+    // Cambiar estado activo/inactivo del usuario
     public function toggleEstado($id)
     {
         $usuario = User::findOrFail($id);

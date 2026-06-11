@@ -6,8 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\Proyecto;
 use App\Models\Cliente;
 
+/**
+ * Controlador de Proyectos
+ * Gestiona el CRUD de proyectos con filtros de búsqueda y estado
+ */
 class ProyectoController extends Controller
 {
+    // Listar proyectos con filtros opcionales por nombre/descripción y estado
     public function index(Request $request)
     {
         $buscar = $request->buscar;
@@ -27,12 +32,14 @@ class ProyectoController extends Controller
         return view('proyectos.index', compact('proyectos', 'buscar', 'estado'));
     }
 
+    // Mostrar formulario de creación con lista de clientes
     public function create()
     {
         $clientes = Cliente::orderBy('nombre', 'asc')->get();
         return view('proyectos.create', compact('clientes'));
     }
 
+    // Guardar nuevo proyecto asignado a un cliente
     public function store(Request $request)
     {
         $request->validate([
@@ -50,6 +57,7 @@ class ProyectoController extends Controller
                          ->with('mensaje', 'Proyecto registrado correctamente.');
     }
 
+    // Mostrar formulario de edición con datos del proyecto y lista de clientes
     public function edit($id)
     {
         $proyecto = Proyecto::findOrFail($id);
@@ -58,6 +66,7 @@ class ProyectoController extends Controller
         return view('proyectos.edit', compact('proyecto', 'clientes'));
     }
 
+    // Actualizar proyecto existente
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -76,6 +85,7 @@ class ProyectoController extends Controller
                          ->with('mensaje', 'Proyecto actualizado correctamente.');
     }
 
+    // Eliminar proyecto
     public function destroy($id)
     {
         $proyecto = Proyecto::findOrFail($id);

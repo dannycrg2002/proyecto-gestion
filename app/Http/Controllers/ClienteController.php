@@ -5,28 +5,26 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 
+/**
+ * Controlador de Clientes
+ * Gestiona el CRUD de clientes del sistema
+ */
 class ClienteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Listar todos los clientes
     public function index()
     {
         $clientes = Cliente::all();
         return view('clientes.index', compact('clientes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Mostrar formulario de creación
     public function create()
     {
         return view('clientes.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Guardar nuevo cliente validando email único
     public function store(Request $request)
     {
         $request->validate([
@@ -40,27 +38,21 @@ class ClienteController extends Controller
         return redirect()->route('clientes.index')->with('success', 'Cliente creado exitosamente.');
     }
 
-    /**
-     * Display the specified resource.
-     */
+    // Mostrar detalle de cliente con sus proyectos
     public function show($id)
     {
         $cliente = Cliente::with('proyectos')->findOrFail($id);
         return view('clientes.show', compact('cliente'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    // Mostrar formulario de edición
     public function edit($id)
     {
         $cliente = Cliente::findOrFail($id);
         return view('clientes.edit', compact('cliente'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // Actualizar cliente (validar email único excepto el actual)
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -75,9 +67,7 @@ class ClienteController extends Controller
         return redirect()->route('clientes.index')->with('success', 'Cliente actualizado exitosamente.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // Eliminar cliente (también elimina sus proyectos por cascada)
     public function destroy($id)
     {
         $cliente = Cliente::findOrFail($id);

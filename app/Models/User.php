@@ -8,24 +8,24 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * Modelo de Usuario
+ * Gestiona los usuarios del sistema con roles: Admin, Gerente, Desarrollador
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    //Nombre de la tabla en la base de datos
+    // Nombre de la tabla en la base de datos
     protected $table = 'Usuarios';
 
-    //Clave primaria de la tabla
+    // Clave primaria de la tabla
     protected $primaryKey = 'id_usuario';
 
-    //Desactivar timestamps automáticos (solo usamos created_at)
+    // Desactivar timestamps automáticos
     public $timestamps = false;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    // Campos que se pueden asignar masivamente
     protected $fillable = [
         'nombre',
         'correo',
@@ -34,26 +34,18 @@ class User extends Authenticatable
         'estado',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
+    // Campos ocultos en serialización (JSON, arrays)
     protected $hidden = [
         'contraseña',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
+    // Convertir campos a tipos específicos
     protected $casts = [
         'created_at' => 'datetime',
     ];
 
-    //Obtener el nombre del campo de contraseña
+    // Especificar campo personalizado de contraseña para autenticación
     public function getAuthPassword()
     {
         return $this->contraseña;
